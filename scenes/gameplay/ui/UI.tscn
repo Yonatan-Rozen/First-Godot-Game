@@ -1,0 +1,225 @@
+[gd_scene load_steps=13 format=3 uid="uid://bt6tur23n3nmf"]
+
+[ext_resource type="Texture2D" uid="uid://bfn73xxlbydr0" path="res://assets/icon/The Super Cute Dragon Slayer.png" id="1_bdebo"]
+[ext_resource type="FontFile" uid="uid://meyyaeq1ioh2" path="res://assets/fonts/Silkscreen-Bold.ttf" id="2_lrolo"]
+[ext_resource type="FontFile" uid="uid://cgx7u4yjac87r" path="res://assets/fonts/Silkscreen-Regular.ttf" id="3_qx2ub"]
+[ext_resource type="Texture2D" uid="uid://dksp8auk2b28y" path="res://assets/icon/coin.png" id="4_akeh3"]
+[ext_resource type="Texture2D" uid="uid://brbpjbepf03xh" path="res://assets/icon/music-on.png" id="5_nm56i"]
+[ext_resource type="Script" path="res://scenes/gameplay/sounds/ToggleMusic.gd" id="6_seoa8"]
+
+[sub_resource type="GDScript" id="GDScript_ki1nv"]
+script/source = "extends CanvasLayer
+
+var score = 0
+
+@onready var coins = %Coins
+
+func _ready():
+	get_viewport().size = DisplayServer.screen_get_size()
+
+func add_pont():
+	score += 1
+	coins.text = \"Coins: \" + str(score)
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50l17"]
+bg_color = Color(0.823529, 0.12549, 0.172549, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.101961, 0.101961, 0.101961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.215902, 0.215902, 0.215902, 0.6)
+shadow_size = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf772"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnxlv"]
+bg_color = Color(0.0392157, 0.439216, 0.184314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mrfx"]
+bg_color = Color(0.956863, 0.682353, 0.145098, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.101961, 0.101961, 0.101961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.215902, 0.215902, 0.215902, 0.6)
+shadow_size = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mh8j"]
+bg_color = Color(0.245335, 0.264188, 0.329562, 1)
+border_width_left = 6
+border_width_top = 6
+border_width_right = 6
+border_width_bottom = 6
+border_color = Color(0.101961, 0.101961, 0.101961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.215902, 0.215902, 0.215902, 0.6)
+shadow_size = 13
+
+[node name="UI" type="CanvasLayer"]
+script = SubResource("GDScript_ki1nv")
+
+[node name="PlayerInfoBox" type="Panel" parent="."]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 369.0
+offset_bottom = 154.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_50l17")
+
+[node name="AvatarFrame" type="Panel" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -47.5
+offset_right = 113.0
+offset_bottom = 50.5
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sf772")
+
+[node name="Avatar" type="TextureRect" parent="PlayerInfoBox/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -42.0
+offset_right = 42.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bdebo")
+expand_mode = 1
+
+[node name="Nickname" type="Label" parent="PlayerInfoBox"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 16.0
+offset_right = 331.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0.937255, 0.866667, 0.811765, 1)
+theme_override_fonts/font = ExtResource("2_lrolo")
+theme_override_font_sizes/font_size = 16
+text = "Knight
+Dragon Slayer"
+horizontal_alignment = 1
+
+[node name="ExperienceProgress" type="ProgressBar" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = -55.0
+offset_right = -12.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_qx2ub")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/background = SubResource("StyleBoxFlat_fnxlv")
+
+[node name="CoinBox" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -278.0
+offset_top = 25.0
+offset_right = -27.0
+offset_bottom = 119.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6mrfx")
+
+[node name="CoinFrame" type="Panel" parent="CoinBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -33.0
+offset_right = 80.0
+offset_bottom = 33.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sf772")
+
+[node name="CoinImage" type="TextureRect" parent="CoinBox/CoinFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_akeh3")
+expand_mode = 1
+
+[node name="Coins" type="Label" parent="CoinBox"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 85.0
+offset_top = 8.0
+offset_right = 243.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_qx2ub")
+theme_override_font_sizes/font_size = 24
+text = "coins: 0"
+vertical_alignment = 1
+
+[node name="TogglePanel" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -278.0
+offset_top = 119.0
+offset_right = -27.0
+offset_bottom = 213.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mh8j")
+
+[node name="ToggleMusic" type="TextureButton" parent="TogglePanel"]
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -215.0
+offset_top = 14.0
+offset_right = -183.0
+offset_bottom = 46.0
+grow_horizontal = 0
+scale = Vector2(2, 2)
+focus_mode = 0
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("5_nm56i")
+script = ExtResource("6_seoa8")
+
+[connection signal="pressed" from="TogglePanel/ToggleMusic" to="TogglePanel/ToggleMusic" method="_on_TextureButton_pressed"]

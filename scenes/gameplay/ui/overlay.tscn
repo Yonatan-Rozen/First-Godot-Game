@@ -1,0 +1,318 @@
+[gd_scene load_steps=17 format=3 uid="uid://cwjqsfwny61g3"]
+
+[ext_resource type="Texture2D" uid="uid://bfn73xxlbydr0" path="res://assets/icon/The Super Cute Dragon Slayer.png" id="1_6lyfu"]
+[ext_resource type="FontFile" uid="uid://meyyaeq1ioh2" path="res://assets/fonts/Silkscreen-Bold.ttf" id="2_du038"]
+[ext_resource type="FontFile" uid="uid://cgx7u4yjac87r" path="res://assets/fonts/Silkscreen-Regular.ttf" id="3_aybnk"]
+[ext_resource type="Texture2D" uid="uid://dksp8auk2b28y" path="res://assets/icon/coin.png" id="4_foyv0"]
+[ext_resource type="FontFile" uid="uid://bw2xmkrl4nilu" path="res://assets/fonts/PixelOperator8.ttf" id="5_nh0mh"]
+[ext_resource type="PackedScene" uid="uid://ceedk8ie4erno" path="res://assets/buttons/settings_button.tscn" id="6_w5flu"]
+[ext_resource type="PackedScene" uid="uid://l4xgkm1wwr82" path="res://scenes/menus/options menu/settings_tab_container.tscn" id="7_fi8aa"]
+[ext_resource type="StyleBox" uid="uid://buvfo4tvmnsc1" path="res://assets/styles/menu_button_style.tres" id="8_xqnic"]
+[ext_resource type="StyleBox" uid="uid://kvaubiyn17up" path="res://assets/styles/hover_menu_button_style.tres" id="9_qnfg4"]
+
+[sub_resource type="GDScript" id="GDScript_ki1nv"]
+script/source = "class_name Overlay
+extends CanvasLayer
+
+@onready var player_info_box = $PlayerInfoBox as Panel
+@onready var coin_box = $CoinBox as Panel
+@onready var settings = $Settings as Panel
+@onready var settings_button = %SettingsButton as Button
+
+@onready var settings_container = $SettingsContainer as MarginContainer
+
+@onready var coins = %Coins as Label
+@onready var continue_button = %ContinueButton as Button
+
+var score = 0
+
+# func _ready():
+#	get_viewport().size = DisplayServer.screen_get_size()
+
+func add_point():
+	score += 1
+	coins.text = \"Coins: \" + str(score)
+
+func _on_settings_button_pressed():
+	# hide gameplay overlay
+	player_info_box.show()
+	coin_box.show()
+	settings.show()
+	# display settings
+	settings_container.show()
+
+func _on_continue_button_pressed():
+	# display gameplay overlay
+	player_info_box.show()
+	coin_box.show()
+	settings.show()
+	
+	# hide settings
+	settings_container.hide()
+"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_50l17"]
+bg_color = Color(0.28102, 0.00026366, 0.359313, 1)
+border_width_left = 40
+border_width_top = 5
+border_width_right = 40
+border_width_bottom = 5
+border_color = Color(0.218889, 0.0644168, 0.271281, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.215902, 0.215902, 0.215902, 0.6)
+shadow_size = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf772"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vmnc"]
+bg_color = Color(0.823529, 0.145098, 0.137255, 1)
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fnxlv"]
+bg_color = Color(0.0392157, 0.568627, 0.184314, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6mrfx"]
+bg_color = Color(0.823629, 0.773004, 0, 1)
+border_width_left = 40
+border_width_top = 5
+border_width_right = 40
+border_width_bottom = 4
+border_color = Color(0.397064, 0.291607, 0.0462544, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.215902, 0.215902, 0.215902, 0.6)
+shadow_size = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mh8j"]
+bg_color = Color(0.329412, 0.207843, 0.00392157, 1)
+border_width_left = 15
+border_width_top = 15
+border_width_right = 15
+border_width_bottom = 15
+border_color = Color(0.520268, 0.402883, 0, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="Overlay" type="CanvasLayer"]
+script = SubResource("GDScript_ki1nv")
+
+[node name="PlayerInfoBox" type="Panel" parent="."]
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 369.0
+offset_bottom = 154.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_50l17")
+
+[node name="AvatarFrame" type="Panel" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 15.0
+offset_top = -47.5
+offset_right = 113.0
+offset_bottom = 50.5
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sf772")
+
+[node name="Avatar" type="TextureRect" parent="PlayerInfoBox/AvatarFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -42.0
+offset_right = 42.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6lyfu")
+expand_mode = 1
+
+[node name="Nickname" type="Label" parent="PlayerInfoBox"]
+layout_mode = 0
+offset_left = 113.0
+offset_top = 16.0
+offset_right = 331.0
+offset_bottom = 67.0
+theme_override_colors/font_color = Color(0.937255, 0.866667, 0.811765, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("2_du038")
+theme_override_font_sizes/font_size = 16
+text = "The super Cute
+Dragon Slayer"
+horizontal_alignment = 1
+
+[node name="ExperienceProgress" type="ProgressBar" parent="PlayerInfoBox"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 120.0
+offset_top = -55.0
+offset_right = -12.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 7
+theme_override_fonts/font = ExtResource("3_aybnk")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/background = SubResource("StyleBoxFlat_6vmnc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fnxlv")
+value = 80.0
+rounded = true
+
+[node name="CoinBox" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -311.0
+offset_top = 25.0
+offset_right = -30.0
+offset_bottom = 119.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6mrfx")
+
+[node name="CoinFrame" type="Panel" parent="CoinBox"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -33.0
+offset_right = 80.0
+offset_bottom = 33.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_sf772")
+
+[node name="CoinImage" type="TextureRect" parent="CoinBox/CoinFrame"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -28.0
+offset_right = 28.0
+offset_bottom = 28.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_foyv0")
+expand_mode = 1
+
+[node name="Coins" type="Label" parent="CoinBox"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 83.0
+offset_top = 8.0
+offset_right = 276.0
+offset_bottom = 86.0
+theme_override_colors/font_color = Color(0.988235, 0.956863, 0.0901961, 1)
+theme_override_colors/font_shadow_color = Color(0.105882, 0.105882, 0.0980392, 1)
+theme_override_colors/font_outline_color = Color(0.960784, 0.45098, 0.121569, 1)
+theme_override_constants/outline_size = 5
+theme_override_constants/shadow_outline_size = 7
+theme_override_fonts/font = ExtResource("5_nh0mh")
+theme_override_font_sizes/font_size = 24
+text = "Coins: -"
+vertical_alignment = 1
+
+[node name="Settings" type="Panel" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -82.0
+offset_top = 123.0
+offset_right = -32.0
+offset_bottom = 173.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mh8j")
+
+[node name="SettingsButton" parent="Settings" instance=ExtResource("6_w5flu")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 33.0
+offset_bottom = 33.0
+scale = Vector2(1.5, 1.5)
+
+[node name="SettingsContainer" type="MarginContainer" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsContainer"]
+layout_mode = 2
+theme_override_constants/separation = -48
+
+[node name="Label" type="Label" parent="SettingsContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("3_aybnk")
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings_Tab_Container" parent="SettingsContainer/VBoxContainer" instance=ExtResource("7_fi8aa")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="SettingsContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_fonts/font = ExtResource("2_du038")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = ExtResource("8_xqnic")
+theme_override_styles/hover = ExtResource("9_qnfg4")
+text = "<< Main Menu [quit]"
+
+[node name="ContinueButton" type="Button" parent="SettingsContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_fonts/font = ExtResource("2_du038")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = ExtResource("8_xqnic")
+theme_override_styles/hover = ExtResource("9_qnfg4")
+text = "Continue >>"
+
+[connection signal="pressed" from="Settings/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="SettingsContainer/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]

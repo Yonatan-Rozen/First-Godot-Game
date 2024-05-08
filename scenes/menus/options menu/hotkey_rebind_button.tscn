@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=3 uid="uid://nukoybs02qah"]
+
+[ext_resource type="FontFile" uid="uid://meyyaeq1ioh2" path="res://assets/fonts/Silkscreen-Bold.ttf" id="1_2jg0n"]
+[ext_resource type="Script" path="res://scenes/menus/options menu/hotkey_rebind_button.gd" id="1_ogahd"]
+[ext_resource type="FontFile" uid="uid://bw2xmkrl4nilu" path="res://assets/fonts/PixelOperator8.ttf" id="3_o1dx0"]
+[ext_resource type="StyleBox" uid="uid://buvfo4tvmnsc1" path="res://assets/styles/menu_button_style.tres" id="4_jjahg"]
+[ext_resource type="StyleBox" uid="uid://kvaubiyn17up" path="res://assets/styles/hover_menu_button_style.tres" id="5_qlup7"]
+[ext_resource type="StyleBox" uid="uid://cfprl1yta0kyt" path="res://assets/styles/click_menu_button_style.tres" id="6_prn7y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g00dw"]
+
+[node name="HotkeyRebindButton" type="Control" groups=["hotkey_button"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ogahd")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -264.0
+offset_top = -20.5
+offset_right = 264.0
+offset_bottom = 20.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ActionLabel" type="Label" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_2jg0n")
+theme_override_font_sizes/font_size = 32
+text = "ACTION"
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_g00dw")
+
+[node name="SelectKeyButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(164, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_o1dx0")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = ExtResource("4_jjahg")
+theme_override_styles/hover = ExtResource("5_qlup7")
+theme_override_styles/pressed = ExtResource("6_prn7y")
+toggle_mode = true
+text = "ACTION_KEY"
+
+[connection signal="toggled" from="HBoxContainer/SelectKeyButton" to="." method="_on_select_key_button_toggled"]

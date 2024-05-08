@@ -1,0 +1,130 @@
+[gd_scene load_steps=11 format=3 uid="uid://l4xgkm1wwr82"]
+
+[ext_resource type="FontFile" uid="uid://cgx7u4yjac87r" path="res://assets/fonts/Silkscreen-Regular.ttf" id="1_p3x1l"]
+[ext_resource type="StyleBox" uid="uid://pixhqxfaln7l" path="res://assets/styles/hovered_tab.tres" id="2_pt8c7"]
+[ext_resource type="StyleBox" uid="uid://bvi312lxhvwug" path="res://assets/styles/selected_tab.tres" id="2_y3gc2"]
+[ext_resource type="StyleBox" uid="uid://c755sbycwmtqx" path="res://assets/styles/unselected_tab.tres" id="3_3hv0q"]
+[ext_resource type="PackedScene" uid="uid://cpf1woma63q4g" path="res://assets/buttons/toggle_music.tscn" id="5_rs27q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hptmc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l3m83"]
+bg_color = Color(0.176471, 0.176471, 0.176471, 0.486275)
+border_width_left = 140
+border_width_top = 5
+border_width_right = 40
+border_width_bottom = 5
+border_color = Color(0.133333, 0.133333, 0.133333, 1)
+border_blend = true
+corner_radius_top_left = 100
+corner_radius_top_right = 5
+corner_radius_bottom_right = 100
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imj8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dpsmh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bkog3"]
+
+[node name="Settings_Tab_Container" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 100.0
+offset_right = -150.0
+offset_bottom = -100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_p3x1l")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/tab_selected = ExtResource("2_y3gc2")
+theme_override_styles/tab_hovered = ExtResource("2_pt8c7")
+theme_override_styles/tab_unselected = ExtResource("3_3hv0q")
+theme_override_styles/tab_focus = SubResource("StyleBoxEmpty_hptmc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_l3m83")
+tab_alignment = 1
+current_tab = 1
+
+[node name="Sound" type="TabBar" parent="TabContainer"]
+visible = false
+layout_mode = 2
+focus_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Sound/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 64
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Sound/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/Sound/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("1_p3x1l")
+theme_override_font_sizes/font_size = 40
+text = "Toggle Sounds"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/Sound/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 60
+theme_override_styles/separator = SubResource("StyleBoxEmpty_imj8l")
+
+[node name="ToggleMusic" parent="TabContainer/Sound/MarginContainer/VBoxContainer/HBoxContainer" instance=ExtResource("5_rs27q")]
+layout_mode = 2
+size_flags_horizontal = 3
+stretch_mode = 5
+
+[node name="Controls" type="TabBar" parent="TabContainer"]
+layout_mode = 2
+focus_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Controls/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 65
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_dpsmh")
+
+[node name="HSeparator" type="HSeparator" parent="TabContainer/Controls/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+theme_override_styles/separator = SubResource("StyleBoxEmpty_bkog3")

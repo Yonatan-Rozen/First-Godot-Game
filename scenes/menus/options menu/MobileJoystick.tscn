@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://lxdhguyedoy2"]
+
+[ext_resource type="Script" path="res://CanvasLayer.gd" id="1_8tdvy"]
+[ext_resource type="Texture2D" uid="uid://dnjo4jin4cmnp" path="res://scenes/menus/options menu/JoystickPanel.png" id="2_d1wq5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bv7nk"]
+size = Vector2(561, 142)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_8tdvy")
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+texture_normal = ExtResource("2_d1wq5")
+shape = SubResource("RectangleShape2D_bv7nk")

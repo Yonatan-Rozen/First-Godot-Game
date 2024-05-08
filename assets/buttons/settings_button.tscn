@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceedk8ie4erno"]
+
+[ext_resource type="Texture2D" uid="uid://cvc58oeni3aw3" path="res://assets/icon/settings.png" id="1_lscc7"]
+
+[node name="SettingsButton" type="TextureButton"]
+offset_right = 32.0
+offset_bottom = 32.0
+scale = Vector2(2, 2)
+focus_mode = 0
+texture_normal = ExtResource("1_lscc7")
