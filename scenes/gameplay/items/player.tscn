@@ -190,5 +190,6 @@ shape = SubResource("CircleShape2D_33jh7")
 [node name="MobileControls" parent="." instance=ExtResource("3_fd2n2")]
 
 [node name="MobileJoystick" parent="." instance=ExtResource("4_nehm0")]
+visible = false
 
 [connection signal="use_joystick_direction" from="MobileJoystick" to="." method="_on_mobile_joystick_use_joystick_direction"]
